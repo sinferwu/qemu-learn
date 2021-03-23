@@ -2,7 +2,7 @@ CC:=arm-none-eabi-gcc
 CFLAGS:=-g -mcpu=cortex-a15
 LDFLAGS:=-T main.ld --specs=nano.specs --specs=rdimon.specs
 OBJCOPY:=arm-none-eabi-objcopy
-QEMU:=../qemu/build/qemu-system-arm
+QEMU:=qemu-system-arm
 TMUX:=tmux
 TMUX_SESSION:=qemu
 TMUX_MAIN_WINDOW:=qemu-main
@@ -12,7 +12,7 @@ all: main.bin
 run: main.bin
 	$(TMUX) \
 		new-session -d -s $(TMUX_SESSION) -n $(TMUX_MAIN_WINDOW) sh \; \
-		split-window -h arm-none-eabi-gdb -q \; \
+		split-window -h gdb-multiarch -q \; \
 		send-keys -t .left \
 			"$(QEMU) \
 				-nographic \
